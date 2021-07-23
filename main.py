@@ -3,7 +3,6 @@ from tkinter import ttk
 import rename
 
 def submit():
-
     file_path = path_var.get()
     new_dir = rename.setup(file_path)
     success_label = Label(mainframe, text="That file path does not exist!")
@@ -15,11 +14,32 @@ def submit():
         rename.rename(new_dir)
         success_label.config(text="Executed successfully :)")
 
+def make_menu(w):
+    global the_menu
+    the_menu = Menu(w, tearoff=0)
+    the_menu.add_command(label="Cut")
+    the_menu.add_command(label="Copy")
+    the_menu.add_command(label="Paste")
+
+def show_menu(e):
+    w = e.widget
+    the_menu.entryconfigure("Cut",
+    command=lambda: w.event_generate("<<Cut>>"))
+    the_menu.entryconfigure("Copy",
+    command=lambda: w.event_generate("<<Copy>>"))
+    the_menu.entryconfigure("Paste",
+    command=lambda: w.event_generate("<<Paste>>"))
+    the_menu.tk.call("tk_popup", the_menu, e.x_root, e.y_root)
+
 
 file_path = ''
 root = Tk()
 root.geometry("400x100")
 root.title("V-Top Renamer")
+
+make_menu(root)
+e1 = Entry(); e1.grid()
+e1.bind_class("Entry", "<Button-3><ButtonRelease-3>", show_menu)
 
 mainframe = ttk.Frame(root, padding="15 15 15 15")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
