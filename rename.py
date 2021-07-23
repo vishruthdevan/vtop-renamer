@@ -10,7 +10,7 @@ def setup(path):
     if not notes.exists():
         return False
 
-    if notes.suffix == 'zip':
+    if notes.suffix == '.zip':
         notes_zip = zipfile.ZipFile(notes)
         path = notes.parent / notes.stem
         if not os.path.exists(str(path)):
@@ -18,6 +18,8 @@ def setup(path):
         # if not os.path.exists(str(path)+ '-pretty'):
         #     os.mkdir(str(path)+'-pretty')
         notes_zip.extractall(path)
+        shutil.copytree(path, str(path)+'_pretty', dirs_exist_ok=True)
+        return str(path)+'_pretty'
     
     shutil.copytree(path, str(path)+'_pretty', dirs_exist_ok=True)
     return str(path)+'_pretty'
@@ -38,6 +40,6 @@ def rename(path):
         m = re.search(pattern, i)
         newName = str(path) + '\\' + str(count) + '. ' + m.group(2) + '-'+ m.group(1) + '-' + m.group(3) + m.group(4)
         print(newName)
-        #shutil.move(i, newName)
+        shutil.move(i, newName)
         count+=1
     
