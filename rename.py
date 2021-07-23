@@ -5,17 +5,21 @@ from pprint import pprint
 import zipfile
 
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-def setup():
-    notes = Path(' '.join(sys.argv[1:])).absolute()
-    notes_zip = zipfile.ZipFile(notes)
-    path = notes.parent / notes.stem
-    if not os.path.exists(str(path)):
-        os.mkdir(str(path))
-    # if not os.path.exists(str(path)+ '-pretty'):
-    #     os.mkdir(str(path)+'-pretty')
-    notes_zip.extractall(path)
-    shutil.copytree(path, str(path)+'_pretty', dirs_exist_ok=True)
+def setup(path):
+    notes = Path(path).absolute()
+    if not notes.exists():
+        return False
 
+    if notes.suffix == 'zip':
+        notes_zip = zipfile.ZipFile(notes)
+        path = notes.parent / notes.stem
+        if not os.path.exists(str(path)):
+            os.mkdir(str(path))
+        # if not os.path.exists(str(path)+ '-pretty'):
+        #     os.mkdir(str(path)+'-pretty')
+        notes_zip.extractall(path)
+    
+    shutil.copytree(path, str(path)+'_pretty', dirs_exist_ok=True)
     return str(path)+'_pretty'
 
 def rename(path):
@@ -33,10 +37,7 @@ def rename(path):
     for i, j in sorted_names:
         m = re.search(pattern, i)
         newName = str(path) + '\\' + str(count) + '. ' + m.group(2) + '-'+ m.group(1) + '-' + m.group(3) + m.group(4)
-        shutil.move(i, newName)
+        print(newName)
+        #shutil.move(i, newName)
         count+=1
     
-
-if __name__=="__main__":
-    rename(setup())
-    print("Executed successfully :)")
