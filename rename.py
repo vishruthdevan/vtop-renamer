@@ -7,7 +7,7 @@ import zipfile
 months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 def setup(path):
     notes = Path(path).absolute()
-    if not notes.exists():
+    if not notes.exists() or path=='':
         return False
 
     if notes.suffix == '.zip':

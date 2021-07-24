@@ -13,7 +13,7 @@ def submit():
     file_path = path_var.get()
     new_dir = rename.setup(file_path)
     success_label = Label(mainframe, text="That file path does not exist!")
-    success_label.grid(column=0, row=2, columnspan = 2)
+    success_label.grid(column=0, row=2)
     if not new_dir:
         success_label.config(text="That file/folder does not exist!")
         
@@ -44,6 +44,7 @@ root = Tk()
 root.geometry("450x100")
 root.title("V-Top Renamer")
 root.wm_iconbitmap(tempFile)
+
 os.remove(tempFile)
 
 make_menu(root)
@@ -52,8 +53,11 @@ e1.bind_class("Entry", "<Button-3><ButtonRelease-3>", show_menu)
 
 mainframe = ttk.Frame(root, padding="15 15 15 15")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-mainframe.columnconfigure(0, weight=10)
-mainframe.rowconfigure(0, weight=10)
+for i in range(2):
+    root.columnconfigure(i, weight=1)
+    root.rowconfigure(i, weight=1)
+#root.rowconfigure(3, weight=60)
+
 path_var = StringVar()
 
 root_label = Label(mainframe, text="Enter path to zip file or folder: ")
@@ -64,7 +68,7 @@ root_entry.grid(column=1, row=0)
 submit_button = Button(mainframe, text='Submit', command=submit)
 submit_button.grid(column=1, row=1)
 
-created_label = Label(root, text="Made by Vishruth Devan", font=("Arial", 7))
-created_label.grid(column=0, row=2, sticky=(SW))
+Label(root, text="Made by Vishruth Devan", font=("Arial", 7)).grid(column=0, row=3, sticky=(S, W))
+
 root.mainloop()
 
