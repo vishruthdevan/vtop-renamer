@@ -1,6 +1,13 @@
 from tkinter import *
 from tkinter import ttk
+import base64, os
 import rename
+from icon import icon
+icondata= base64.b64decode(icon)
+tempFile= "icon.ico"
+iconfile= open(tempFile,"wb")
+iconfile.write(icondata)
+iconfile.close()
 
 def submit():
     file_path = path_var.get()
@@ -34,8 +41,10 @@ def show_menu(e):
 
 file_path = ''
 root = Tk()
-root.geometry("400x100")
+root.geometry("450x100")
 root.title("V-Top Renamer")
+root.wm_iconbitmap(tempFile)
+os.remove(tempFile)
 
 make_menu(root)
 e1 = Entry(); e1.grid()
@@ -47,14 +56,15 @@ mainframe.columnconfigure(0, weight=10)
 mainframe.rowconfigure(0, weight=10)
 path_var = StringVar()
 
-root_label = Label(mainframe, text="Enter path to zip folder: ")
+root_label = Label(mainframe, text="Enter path to zip file or folder: ")
 root_label.grid(column=0, row=0)
 
 root_entry = Entry(mainframe, width=40, textvariable=path_var)
 root_entry.grid(column=1, row=0)
 submit_button = Button(mainframe, text='Submit', command=submit)
 submit_button.grid(column=1, row=1)
+
+created_label = Label(root, text="Made by Vishruth Devan", font=("Arial", 7))
+created_label.grid(column=0, row=2, sticky=(SW))
 root.mainloop()
-
-
 
