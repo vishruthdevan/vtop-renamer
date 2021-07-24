@@ -41,7 +41,7 @@ def show_menu(e):
 
 file_path = ''
 root = Tk()
-root.geometry("450x100")
+root.geometry("450x120")
 root.title("V-Top Renamer")
 root.wm_iconbitmap(tempFile)
 
@@ -56,7 +56,6 @@ mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 for i in range(2):
     root.columnconfigure(i, weight=1)
     root.rowconfigure(i, weight=1)
-#root.rowconfigure(3, weight=60)
 
 path_var = StringVar()
 
