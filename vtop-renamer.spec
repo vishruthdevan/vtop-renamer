@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['D:\\Projects\\vtop-renamer'],
+             pathex=['D:\\projects\\vtop-renamer'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -26,7 +26,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,  
           [],
-          name='main',
+          name='vtop-renamer',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
