@@ -1,5 +1,5 @@
 # vtop-renamer
-A python script to rename lecture notes for the courses in my university to a more readable form
+A python script to rename lecture notes for the courses in my university to a more readable naming format
 
 ### Usage:
 1. Download the executable [vtop-renamer.exe](./dist) from the dist directory and run it  
