@@ -12,7 +12,7 @@ iconfile.close()
 def submit():
     file_path = path_var.get()
     new_dir = rename.setup(file_path)
-    success_label = Label(mainframe, text="That file path does not exist!")
+    success_label = Label(mainframe, text="")
     success_label.grid(column=0, row=2)
     if not new_dir:
         success_label.config(text="That file/folder does not exist!")
