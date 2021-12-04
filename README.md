@@ -1,10 +1,10 @@
 # vtop-renamer
-A python script to rename lecture notes for the courses in my university to a more readable naming format that is chronologically sorted based on the date present in the name of each file.
+A python script to rename lecture notes for courses in my university to a more readable naming format that is chronologically ordered based on the date present in the name of each file.
 
 ### Usage:
-1. Download the executable [vtop-renamer.exe](https://github.com/vishruthdevan/vtop-renamer/releases) from the GitHub releases and run it  
-2. Enter the path to the zip file of the notes or to the directory that contains the already extracted notes  
-3. The notes after renaming will be saved in the directory "<filename>_pretty"
+1. Download the executable [vtop-renamer.exe](https://github.com/vishruthdevan/vtop-renamer/releases) from GitHub releases and run it  
+2. Enter the path(without quotation marks) to the zip file or to the directory that contains the already extracted notes  
+3. The notes after renaming will be saved in the same directory or a directory with the same name as the .zip file
 
 ### Before(Notes directory):
 ![image](https://user-images.githubusercontent.com/87470277/126901957-e2a530ee-85c3-4cba-9157-34c05049f3bb.png)
