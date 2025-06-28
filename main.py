@@ -3,21 +3,24 @@ from tkinter import ttk
 import rename
 
 def submit():
+
     file_path = path_var.get()
     new_dir = rename.setup(file_path)
+    success_label = Label(mainframe, text="That file path does not exist!")
+    success_label.grid(column=0, row=2, columnspan = 2)
     if not new_dir:
-        fail_label = Label(mainframe, text="That file path does not exist!")
-        fail_label.gird(column=0, row=2, columnspan = 2)
+        success_label.config(text="That file/folder does not exist!")
+        
     else:
         rename.rename(new_dir)
-        success_label = Label(mainframe, text="Executes successfully")
-        success_label.grid(column=0, row=2, columnspan = 2)
+        success_label.config(text="Executed successfully :)")
 
 
 file_path = ''
 root = Tk()
 root.geometry("400x100")
 root.title("V-Top Renamer")
+
 mainframe = ttk.Frame(root, padding="15 15 15 15")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=10)
