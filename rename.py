@@ -12,6 +12,7 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 
 
 def setup(path):
+    path = path.strip("\"").strip("'")
     notes = Path(path).absolute()
     if not notes.exists() or path == '':
         return False
@@ -34,7 +35,7 @@ def rename(path):
     pattern1 = r"(\d\d)-(\w\w\w)-(\d\d\d\d)(.*)"
     pattern2 = r"(\d\d)-(\d\d)-(\d\d\d\d)(.*)"
     for i in os.listdir(path):
-        if(m := re.search(pattern1, i)):
+        if (m := re.search(pattern1, i)):
             d = date(int(m.group(3)), int(
                 months.index(m.group(2)))+1, int(m.group(1)))
             oldName = str(path) + "\\" + i
@@ -43,7 +44,7 @@ def rename(path):
             newnames.append(str(path) + '\\##. ' + m.group(2) +
                             '-' + m.group(1) + '-' + m.group(3) + m.group(4))
 
-        if(m := re.search(pattern2, i)):
+        if (m := re.search(pattern2, i)):
             d = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
             oldName = str(path) + "\\" + i
             namelist.append(oldName)
