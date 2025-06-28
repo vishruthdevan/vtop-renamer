@@ -28,7 +28,6 @@ def rename(path):
     namelist = list()
     datelist = list()
     newnames = list()
-    count = 1
     pattern1 = r"(\d\d)-(\w\w\w)-(\d\d\d\d)(.*)"
     pattern2 = r"(\d\d)-(\d\d)-(\d\d\d\d)(.*)"
     for i in os.listdir(path):
@@ -37,18 +36,20 @@ def rename(path):
             oldName = str(path) + "\\" + i
             namelist.append(oldName)
             datelist.append(d)
-            newnames.append(str(path) + '\\' + str(count) + '. ' + m.group(2) + '-'+ m.group(1) + '-' + m.group(3) + m.group(4))
-            count += 1
+            newnames.append(str(path) + '\\##. ' + m.group(2) + '-'+ m.group(1) + '-' + m.group(3) + m.group(4))
         
         if(m := re.search(pattern2, i)):
             d = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
             oldName = str(path) + "\\" + i
             namelist.append(oldName)
             datelist.append(d)
-            newnames.append(str(path) + '\\' + str(count) + '. ' + months[int(m.group(2))-1] + '-'+ m.group(1) + '-' + m.group(3) + m.group(4))
-            count += 1
+            newnames.append(str(path) + '\\##. ' + months[int(m.group(2))-1] + '-'+ m.group(1) + '-' + m.group(3) + m.group(4))
     
-    sorted_names = sorted(list(zip(namelist, datelist)), key = lambda x: x[1])
-    for i in len(sorted_names):
-        shutil.move(sorted_names[i][0], newnames[i])
+    count = 1
+    sorted_names = sorted(list(zip(namelist, datelist, newnames)), key = lambda x: x[1])
+    for i, j, k in sorted_names:
+        k = k.replace('##', str(count))
+        count += 1
+        print(k)
+        shutil.move(i, k)
     
